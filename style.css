@@ -1,0 +1,83 @@
+body {
+  margin: 0;
+  background: black;
+  color: white;
+  font-family: Arial;
+  overflow: hidden;
+  text-align: center;
+}
+
+.slide {
+  display: none;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.active {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
+
+input, button {
+  padding: 10px;
+  font-size: 18px;
+  margin: 10px;
+}
+
+/* TITLE */
+.title {
+  font-size: 40px;
+  color: pink;
+  margin-top: 40px;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px pink; }
+  to { text-shadow: 0 0 25px red; }
+}
+
+/* typing */
+#typing {
+  font-size: 20px;
+  margin-top: 20px;
+  color: #fff;
+}
+
+/* balloons */
+.balloon {
+  position: absolute;
+  bottom: -100px;
+  width: 30px;
+  height: 40px;
+  border-radius: 50%;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  to { transform: translateY(-120vh); }
+}
+
+/* hearts */
+.heart {
+  position: absolute;
+  font-size: 20px;
+  color: red;
+  animation: fall 5s linear infinite;
+}
+
+@keyframes fall {
+  to { transform: translateY(120vh); }
+}
+
+/* fireworks */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
