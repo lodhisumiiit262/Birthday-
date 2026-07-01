@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Gungun ❤️</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#ff4e8a,#ff9ecf,#ffd6e7);
+overflow:hidden;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+}
+
+.container{
+z-index:5;
+padding:20px;
+}
+
+h1{
+font-size:42px;
+animation:zoom 2s infinite alternate;
+text-shadow:0 0 15px white;
+}
+
+h2{
+margin-top:15px;
+font-size:28px;
+}
+
+p{
+margin-top:20px;
+font-size:20px;
+line-height:1.7;
+}
+
+button{
+margin-top:30px;
+padding:15px 35px;
+font-size:20px;
+border:none;
+border-radius:40px;
+background:white;
+color:#ff006a;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 0 20px white;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+@keyframes zoom{
+from{transform:scale(1);}
+to{transform:scale(1.08);}
+}
+
+.balloon{
+position:absolute;
+bottom:-150px;
+width:60px;
+height:80px;
+border-radius:50%;
+animation:float 10s linear infinite;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0);
+}
+100%{
+transform:translateY(-120vh);
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🎂 Happy Birthday Gungun ❤️</h1>
+
+<h2>Mera Baccha ❤️<br>Mera Chheku 🥹💕</h2>
+
+<p>
+Aaj ka din mere liye sabse special hai ❤️<br><br>
+
+Happy Birthday meri jaan 🥹💕<br>
+
+Main dua karta hu ki tum hamesha khush raho,<br>
+hamesha muskurati raho ❤️<br><br>
+
+I Love You Forever ❤️<br><br>
+
+<b>– Tumhara Sumit ❤️</b>
+
+</p>
+
+<button onclick="surprise()">🎁 Open Surprise</button>
+
+</div>
+
+<script>
+
+function surprise(){
+
+alert("Happy Birthday Gungun ❤️🎂\n\nI Love You Forever ❤️\n\nFrom Sumit");
+
+}
+
+for(let i=0;i<30;i++){
+
+let b=document.createElement("div");
+
+b.className="balloon";
+
+b.style.left=Math.random()*100+"vw";
+
+b.style.background=`hsl(${Math.random()*360},100%,70%)`;
+
+b.style.animationDuration=(6+Math.random()*5)+"s";
+
+document.body.appendChild(b);
+
+}
+
+</script>
+
+</body>
+</html>
