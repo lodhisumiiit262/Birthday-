@@ -1,106 +1,21 @@
-<style>
-body{
-  margin:0;
-  overflow:hidden;
-  background:black;
-  font-family:Arial;
-  color:white;
-}
-
-/* Intro */
-#intro{
-  position:absolute;
-  width:100%;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-
-h1{
-  font-size:60px;   /* 👈 BIG TEXT FIX */
-  animation: glow 2s infinite alternate;
-}
-
-@keyframes glow{
-  from{ text-shadow:0 0 10px white; }
-  to{ text-shadow:0 0 40px #ff4fd8; }
-}
-
 button{
-  padding:15px 30px;
-  font-size:20px;
+  padding:18px 50px;
+  font-size:24px;
   border:none;
-  border-radius:12px;
+  border-radius:40px;
   cursor:pointer;
-  margin-top:20px;
-}
-
-/* Main screen */
-#main{
-  display:none;
-  height:100vh;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  text-align:center;
-}
-
-/* BIG MESSAGE FIX */
-#msg{
-  font-size:40px;   /* 👈 BIG TEXT FIX */
-  color:#ff4fd8;
+  background:linear-gradient(45deg,#ff4fd8,#7afcff);
+  color:black;
+  font-weight:800;
+  letter-spacing:1px;
   margin-top:25px;
-  min-height:60px;
-  font-weight:bold;
-  text-shadow:0 0 20px #ff4fd8;
+
+  box-shadow:0 0 20px rgba(255,79,216,0.6);
+  transition:0.3s ease;
 }
 
-/* Image bigger */
-#slide{
-  width:320px;
-  height:320px;
-  border-radius:20px;
-  margin-top:20px;
-  object-fit:cover;
-  border:4px solid white;
+/* hover effect */
+button:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 35px rgba(122,252,255,0.8);
 }
-
-/* Balloons */
-.balloon{
-  position:absolute;
-  width:35px;
-  height:45px;
-  border-radius:50%;
-  animation: floatUp 6s linear forwards;
-}
-
-@keyframes floatUp{
-  from{transform:translateY(100vh);}
-  to{transform:translateY(-120vh); opacity:0;}
-}
-
-/* Hearts */
-.heart{
-  position:absolute;
-  color:#ff5ca8;
-  animation: floatUp 6s linear forwards;
-}
-
-/* Fireworks */
-.spark{
-  position:absolute;
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:yellow;
-  animation: explode 1s ease-out forwards;
-}
-
-@keyframes explode{
-  from{transform:scale(1); opacity:1;}
-  to{transform:scale(25); opacity:0;}
-}
-</style>
