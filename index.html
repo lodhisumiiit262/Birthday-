@@ -3,127 +3,165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday</title>
+<title>Surprise</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
-
 *{
   margin:0;
   padding:0;
+  font-family:Arial;
   box-sizing:border-box;
-  font-family:'Poppins', sans-serif;
 }
 
 body{
   height:100vh;
   overflow:hidden;
-  background: radial-gradient(circle at top,#1b2735,#090a0f);
+  background:#0b0f2a;
+  color:white;
   display:flex;
   justify-content:center;
   align-items:center;
-  color:white;
 }
 
-/* Main Card */
-.card{
+/* center box */
+.box{
   text-align:center;
-  padding:40px;
-  border-radius:20px;
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 0 30px rgba(255, 77, 166, 0.2);
-  animation: fadeIn 1.5s ease;
+  padding:30px;
 }
 
-@keyframes fadeIn{
-  from{opacity:0; transform:scale(0.8);}
-  to{opacity:1; transform:scale(1);}
-}
-
-h1{
-  font-size:48px;
-  font-weight:700;
-  background: linear-gradient(90deg,#ff4da6,#ffd93d,#6a5acd);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation: glow 2s infinite alternate;
-}
-
-@keyframes glow{
-  from{filter: drop-shadow(0 0 5px #ff4da6);}
-  to{filter: drop-shadow(0 0 20px #ffd93d);}
-}
-
-p{
-  margin-top:15px;
+/* input */
+input{
+  padding:10px;
   font-size:18px;
-  opacity:0.9;
+  border-radius:10px;
+  border:none;
+  outline:none;
+  margin-top:15px;
 }
 
-/* Button */
+/* button */
 button{
-  margin-top:25px;
-  padding:12px 35px;
-  font-size:16px;
+  padding:10px 20px;
+  margin-top:15px;
   border:none;
-  border-radius:50px;
-  cursor:pointer;
-  background:linear-gradient(90deg,#ff4da6,#ff1f8f);
+  border-radius:20px;
+  background:#ff4da6;
   color:white;
-  transition:0.3s;
+  cursor:pointer;
+  font-size:16px;
 }
 
 button:hover{
-  transform:scale(1.1);
+  transform:scale(1.05);
 }
 
-/* Floating hearts */
-.heart{
+/* skip button */
+#skip{
   position:absolute;
-  bottom:-20px;
-  font-size:20px;
-  animation: floatUp 6s linear infinite;
+  right:20px;
+  bottom:20px;
+  background:#ffd93d;
+  color:black;
 }
 
-@keyframes floatUp{
-  0%{transform:translateY(0) scale(1); opacity:1;}
-  100%{transform:translateY(-110vh) scale(1.5); opacity:0;}
+/* big text */
+.big{
+  font-size:40px;
+  font-weight:bold;
+  text-align:center;
 }
+
+/* balloon */
+.balloon{
+  position:absolute;
+  bottom:-100px;
+  width:30px;
+  height:40px;
+  border-radius:50%;
+  animation:up 5s linear forwards;
+}
+
+@keyframes up{
+  from{transform:translateY(0);}
+  to{transform:translateY(-120vh);}
+}
+
+/* romantic page */
+.romantic{
+  text-align:center;
+  padding:30px;
+  max-width:600px;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="card" id="main">
-  <h1>🎉 Happy Birthday Gungun 🎉</h1>
-  <p>A special day deserves a special surprise ✨</p>
-  <button onclick="nextPage()">Enter Surprise ▶</button>
+<div class="box" id="screen">
+  <h1>✨ Ready for Surprise ✨</h1>
+  <input type="password" id="pass" placeholder="Enter password">
+  <br>
+  <button onclick="check()">Enter</button>
 </div>
 
+<button id="skip" onclick="skip()">Skip ▶</button>
+
 <script>
-function nextPage(){
+
+function check(){
+  let p = document.getElementById("pass").value;
+  if(p === "gungun"){
+    showBirthday();
+  }else{
+    alert("Wrong password!");
+  }
+}
+
+function skip(){
+  showBirthday();
+}
+
+function showBirthday(){
   document.body.innerHTML = `
-    <div class="card">
-      <h1>🎂 Surprise Unlocked 🎂</h1>
-      <p>You are the reason for this smile 💖</p>
-      <button onclick="location.reload()">Replay</button>
+    <div class="box">
+      <div class="big">
+        🎉 HAPPY BIRTHDAY GUNGUN 🎉<br><br>
+        मेरा बच्चा चीखू ❤️<br>
+        I LOVE YOU 💖
+      </div>
+      <button onclick="romanticPage()">Next ▶</button>
+    </div>
+  `;
+
+  // balloons
+  for(let i=0;i<25;i++){
+    let b = document.createElement("div");
+    b.className = "balloon";
+    b.style.left = Math.random()*100 + "vw";
+    b.style.background = ["red","yellow","blue","pink","orange"][i%5];
+    b.style.animationDuration = (3+Math.random()*3)+"s";
+    document.body.appendChild(b);
+
+    setTimeout(()=>b.remove(),6000);
+  }
+}
+
+function romanticPage(){
+  document.body.innerHTML = `
+    <div class="romantic">
+      <h1>💌 Special Message 💌</h1>
+      <p style="font-size:18px; margin-top:20px; line-height:1.6;">
+        Tum meri life ka sabse beautiful part ho ❤️<br><br>
+        Har din tumhari smile dekhna hi mera favorite moment hai 😊<br><br>
+        Main hamesha tumhare saath rahunga, chahe kuch bhi ho 💕<br><br>
+        You are my happiness, my peace, my everything 💖
+      </p>
+      <button onclick="location.reload()">Replay 🔁</button>
     </div>
   `;
 }
 
-/* Floating hearts generator */
-setInterval(()=>{
-  let h = document.createElement("div");
-  h.className = "heart";
-  h.innerHTML = "❤️";
-  h.style.left = Math.random()*100 + "vw";
-  h.style.fontSize = (15 + Math.random()*20) + "px";
-  h.style.animationDuration = (4 + Math.random()*3) + "s";
-  document.body.appendChild(h);
-
-  setTimeout(()=>h.remove(),7000);
-},300);
 </script>
 
 </body>
