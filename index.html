@@ -24,14 +24,13 @@ body{
 }
 .active{display:flex;}
 
-/* headings */
+/* text */
 h1{
   font-size:45px;
   color:pink;
   text-shadow:0 0 10px red;
 }
 
-/* input */
 input{
   padding:12px;
   font-size:18px;
@@ -52,15 +51,13 @@ button{
   color:white;
   font-weight:bold;
 }
-button:hover{transform:scale(1.1);}
 
-/* skip button */
+/* skip */
 #skip{
   position:absolute;
   right:20px;
   bottom:20px;
   background:red;
-  font-size:22px;
 }
 
 /* message */
@@ -89,7 +86,7 @@ button:hover{transform:scale(1.1);}
   position:absolute;
   color:red;
   font-size:28px;
-  animation:float 4s linear infinite;
+  animation:float 4s linear forwards;
 }
 
 @keyframes float{
@@ -118,17 +115,16 @@ button:hover{transform:scale(1.1);}
 
 <!-- SCREEN 3 -->
 <div class="screen" id="s3">
-  <div class="message" style="font-size:30px;font-weight:bold;color:pink;">
+  <div class="message" style="font-size:28px;font-weight:bold;color:pink;">
     🎉 Happy Birthday Cheeku 🎉<br><br>
 
     Happy Birthday Cheeeku 💖<br>
     Tu meri life me aayi uske liye thankuu 🥺❤️<br><br>
 
-    Bas itna hi kehna hai…<br>
     Tu hamesha mere saath aise hi rehna 💕<br><br>
 
     I LOVE YOU ❤️<br>
-    AND I LOVE YOU SO MUCH ❤️🔥
+    I LOVE YOU SO MUCH ❤️🔥
   </div>
 
   <button onclick="next()">NEXT</button>
@@ -136,13 +132,13 @@ button:hover{transform:scale(1.1);}
 
 <!-- SCREEN 4 -->
 <div class="screen" id="s4">
-  <div class="message" style="font-size:28px;font-weight:bold;color:lightpink;">
+  <div class="message" style="font-size:26px;font-weight:bold;color:lightpink;">
     💌 Final Message 💌<br><br>
 
-    Tu meri duniya ka sabse special part hai 😊❤️<br>
-    Tere bina sab adhoora lagta hai...<br><br>
+    Tu meri life ka sabse special part hai ❤️<br>
+    Tere bina sab adhoora lagta hai 😌<br><br>
 
-    Har din bas yehi dua hai ki tu hamesha smile karti rahe 💕<br><br>
+    Hamesha smile karti rehna 💕<br><br>
 
     I LOVE YOU SO MUCH CHEEKU ❤️🔥<br>
     Forever & Always 💖
@@ -151,11 +147,20 @@ button:hover{transform:scale(1.1);}
 
 <script>
 
+let heartInterval = null;
+
+/* screen switch */
 function show(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+
+  if(id === "s1" || id === "s2"){
+    clearInterval(heartInterval);
+    heartInterval = null;
+  }
 }
 
+/* password */
 function check(){
   let p = document.getElementById("pass").value;
   if(p==="gungun"){
@@ -165,12 +170,14 @@ function check(){
   }
 }
 
+/* start */
 function startSurprise(){
   show("s3");
   balloons();
   hearts();
 }
 
+/* next */
 function next(){
   show("s4");
   hearts();
@@ -178,6 +185,8 @@ function next(){
 
 /* balloons */
 function balloons(){
+  document.querySelectorAll(".balloon").forEach(e=>e.remove());
+
   for(let i=0;i<20;i++){
     let b=document.createElement("div");
     b.className="balloon";
@@ -187,15 +196,19 @@ function balloons(){
   }
 }
 
-/* hearts */
+/* hearts safe */
 function hearts(){
-  setInterval(()=>{
+  if(heartInterval) return;
+
+  heartInterval = setInterval(()=>{
     let h=document.createElement("div");
     h.className="heart";
     h.innerHTML="❤️";
     h.style.left=Math.random()*100+"vw";
     h.style.top="100vh";
+
     document.body.appendChild(h);
+
     setTimeout(()=>h.remove(),4000);
   },300);
 }
@@ -208,4 +221,4 @@ function randomColor(){
 </script>
 
 </body>
-</
+</html>
