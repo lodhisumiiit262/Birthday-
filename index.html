@@ -3,179 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <title>Birthday Surprise</title>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
 
 body{
-  background:#000;
-  color:#fff;
-  overflow:hidden;
+height:100vh;
+overflow:hidden;
+background:black;
+color:white;
 }
 
-/* Center screens */
-.screen{
-  width:100vw;
-  height:100vh;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  text-align:center;
+/* ---------- FIRST SCREEN ---------- */
+#startScreen{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#000,#1a1a1a);
 }
 
-/* Active screen */
-.active{display:flex;}
-
-/* Input */
-input{
-  padding:12px;
-  border-radius:10px;
-  border:none;
-  margin-top:10px;
-  text-align:center;
-}
-
-/* Buttons */
-button{
-  margin-top:15px;
-  padding:12px 25px;
-  border:none;
-  border-radius:25px;
-  background:#ff2e63;
-  color:white;
-  font-size:18px;
-  cursor:pointer;
-}
-
-/* Big text */
 h1{
-  font-size:50px;
-  color:#ffcc00;
+font-size:40px;
+text-align:center;
+color:#ff4d6d;
+margin-bottom:20px;
 }
 
-p{
-  font-size:22px;
-  margin-top:10px;
-  max-width:80%;
+input{
+padding:12px;
+font-size:18px;
+border-radius:10px;
+border:none;
+outline:none;
+text-align:center;
 }
 
-/* Skip */
-.skip{
-  position:absolute;
-  bottom:20px;
-  right:20px;
-  background:#ffffff20;
+button{
+margin-top:15px;
+padding:12px 25px;
+font-size:18px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+background:#ff4d6d;
+color:white;
+transition:0.3s;
 }
 
-/* Balloons */
+button:hover{
+transform:scale(1.1);
+}
+
+/* ---------- SURPRISE SCREEN ---------- */
+#surprise{
+display:none;
+height:100vh;
+position:relative;
+background:black;
+overflow:hidden;
+}
+
+/* typing text */
+#text{
+position:absolute;
+top:40%;
+width:100%;
+text-align:center;
+font-size:30px;
+color:#fff;
+}
+
+/* big message */
+#big{
+position:absolute;
+top:55%;
+width:100%;
+text-align:center;
+font-size:45px;
+font-weight:bold;
+color:#ff4d6d;
+animation:zoom 2s ease-in-out infinite alternate;
+}
+
+@keyframes zoom{
+from{transform:scale(1);}
+to{transform:scale(1.1);}
+}
+
+/* balloons */
 .balloon{
-  position:absolute;
-  bottom:-100px;
-  width:40px;
-  height:50px;
-  background:red;
-  border-radius:50%;
-  animation:float 6s linear infinite;
+position:absolute;
+bottom:-100px;
+width:40px;
+height:50px;
+background:red;
+border-radius:50%;
+animation:float 6s linear infinite;
+opacity:0.7;
 }
 
 @keyframes float{
-  from{transform:translateY(0);}
-  to{transform:translateY(-110vh);}
+to{
+transform:translateY(-110vh);
+}
+}
+
+/* hearts */
+.heart{
+position:absolute;
+color:red;
+font-size:20px;
+animation:rise 5s linear infinite;
+}
+
+@keyframes rise{
+to{
+transform:translateY(-120vh);
+opacity:0;
+}
 }
 </style>
 </head>
 
 <body>
 
-<!-- SCREEN 1 -->
-<div class="screen active" id="s1">
-  <h1>Ready for Surprise 🎁</h1>
-  <p>Enter Password</p>
-  <input type="password" id="pass" placeholder="Enter code">
-  <button onclick="checkPass()">Enter</button>
+<!-- FIRST SCREEN -->
+<div id="startScreen">
+<h1>🎁 Ready for Surprise?</h1>
+<input id="pass" placeholder="Enter Password">
+<button onclick="check()">Open</button>
 </div>
 
-<!-- SCREEN 2 -->
-<div class="screen" id="s2">
-  <h1>🎉 Welcome Gungun 🎉</h1>
-  <p>Tap Next for Surprise</p>
-  <button onclick="next()">Next</button>
+<!-- SURPRISE SCREEN -->
+<div id="surprise">
+<div id="text"></div>
+<div id="big">Happy Birthday ❤️ Gungun</div>
 </div>
-
-<!-- SCREEN 3 -->
-<div class="screen" id="s3">
-  <h1>💖 Happy Birthday 💖</h1>
-  <p><b>Gungun (Cheeku)</b> you are special in my life...</p>
-  <button onclick="nextSlide()">Next Message</button>
-</div>
-
-<!-- SCREEN 4 -->
-<div class="screen" id="s4">
-  <h1>❤️ Message ❤️</h1>
-  <p>I love you so much, you are my happiness...</p>
-  <button onclick="nextSlide2()">Next</button>
-</div>
-
-<!-- FINAL -->
-<div class="screen" id="s5">
-  <h1>🎂 Happy Birthday My Love 🎂</h1>
-  <p>You are my world 💕</p>
-</div>
-
-<button class="skip" onclick="skipAll()">Skip ▶</button>
 
 <script>
+function check(){
+let p = document.getElementById("pass").value;
 
-function show(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+if(p.toLowerCase() === "gungun"){
+document.getElementById("startScreen").style.display="none";
+document.getElementById("surprise").style.display="block";
+
+typeText();
+spawnEffects();
+}
+else{
+alert("Wrong Password 😜");
+}
 }
 
-function checkPass(){
-  let p = document.getElementById("pass").value;
-  if(p === "gungun"){
-    show("s2");
-  } else {
-    alert("Wrong Password");
-  }
+/* typing effect */
+let msg = "You are the most special person in my life ❤️";
+let i=0;
+
+function typeText(){
+if(i < msg.length){
+document.getElementById("text").innerHTML += msg.charAt(i);
+i++;
+setTimeout(typeText,80);
+}
 }
 
-function next(){
-  show("s3");
-}
+/* balloons + hearts */
+function spawnEffects(){
 
-function nextSlide(){
-  show("s4");
-}
+setInterval(()=>{
 
-function nextSlide2(){
-  startBalloons();
-  show("s5");
-}
+let b = document.createElement("div");
+b.className="balloon";
+b.style.left=Math.random()*100+"vw";
+b.style.background=["#ff4d6d","#ffcc00","#00d4ff","#7cff00"][Math.floor(Math.random()*4)];
+document.body.appendChild(b);
+setTimeout(()=>b.remove(),6000);
 
-/* Skip full story */
-function skipAll(){
-  startBalloons();
-  show("s5");
-}
+let h = document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.top="100vh";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
 
-/* Balloon animation */
-function startBalloons(){
-  for(let i=0;i<30;i++){
-    let b = document.createElement("div");
-    b.className = "balloon";
-    b.style.left = Math.random()*100 + "vw";
-    b.style.background = randomColor();
-    b.style.animationDuration = (3+Math.random()*5) + "s";
-    document.body.appendChild(b);
-  }
+},300);
 }
-
-function randomColor(){
-  let colors=["red","pink","yellow","blue","orange","purple"];
-  return colors[Math.floor(Math.random()*colors.length)];
-}
-
 </script>
 
 </body>
