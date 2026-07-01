@@ -2,211 +2,128 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Surprise PRO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday</title>
 
 <style>
-body{
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+*{
   margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
+
+body{
+  height:100vh;
   overflow:hidden;
-  background:black;
-  font-family:Arial;
+  background: radial-gradient(circle at top,#1b2735,#090a0f);
+  display:flex;
+  justify-content:center;
+  align-items:center;
   color:white;
 }
 
-/* Intro */
-#intro{
-  position:absolute;
-  width:100%;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+/* Main Card */
+.card{
   text-align:center;
+  padding:40px;
+  border-radius:20px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 30px rgba(255, 77, 166, 0.2);
+  animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(0.8);}
+  to{opacity:1; transform:scale(1);}
 }
 
 h1{
-  font-size:45px;
+  font-size:48px;
+  font-weight:700;
+  background: linear-gradient(90deg,#ff4da6,#ffd93d,#6a5acd);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
   animation: glow 2s infinite alternate;
 }
 
 @keyframes glow{
-  from{ text-shadow:0 0 10px white; }
-  to{ text-shadow:0 0 30px #ff4fd8; }
+  from{filter: drop-shadow(0 0 5px #ff4da6);}
+  to{filter: drop-shadow(0 0 20px #ffd93d);}
 }
 
-button{
-  padding:12px 25px;
+p{
+  margin-top:15px;
   font-size:18px;
+  opacity:0.9;
+}
+
+/* Button */
+button{
+  margin-top:25px;
+  padding:12px 35px;
+  font-size:16px;
   border:none;
-  border-radius:12px;
+  border-radius:50px;
   cursor:pointer;
-  margin-top:20px;
+  background:linear-gradient(90deg,#ff4da6,#ff1f8f);
+  color:white;
+  transition:0.3s;
 }
 
-/* Message */
-#main{
-  display:none;
-  height:100vh;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  text-align:center;
+button:hover{
+  transform:scale(1.1);
 }
 
-#msg{
-  font-size:28px;
-  color:pink;
-  margin-top:20px;
-  min-height:50px;
-}
-
-/* Balloons */
-.balloon{
+/* Floating hearts */
+.heart{
   position:absolute;
-  width:30px;
-  height:40px;
-  border-radius:50%;
-  animation: floatUp 6s linear forwards;
+  bottom:-20px;
+  font-size:20px;
+  animation: floatUp 6s linear infinite;
 }
 
 @keyframes floatUp{
-  from{transform:translateY(100vh);}
-  to{transform:translateY(-120vh); opacity:0;}
-}
-
-/* Hearts */
-.heart{
-  position:absolute;
-  color:#ff5ca8;
-  animation: floatUp 6s linear forwards;
-}
-
-/* Fireworks */
-.spark{
-  position:absolute;
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:yellow;
-  animation: explode 1s ease-out forwards;
-}
-
-@keyframes explode{
-  from{transform:scale(1); opacity:1;}
-  to{transform:scale(20); opacity:0;}
-}
-
-/* Slideshow */
-#slide{
-  width:250px;
-  height:250px;
-  border-radius:20px;
-  margin-top:20px;
-  object-fit:cover;
-  border:3px solid white;
+  0%{transform:translateY(0) scale(1); opacity:1;}
+  100%{transform:translateY(-110vh) scale(1.5); opacity:0;}
 }
 </style>
 </head>
 
 <body>
 
-<div id="intro">
-  <h1>🎉 Happy Birthday Gungun (Chheku) 🎉</h1>
-  <button onclick="start()">Open Surprise</button>
+<div class="card" id="main">
+  <h1>🎉 Happy Birthday Gungun 🎉</h1>
+  <p>A special day deserves a special surprise ✨</p>
+  <button onclick="nextPage()">Enter Surprise ▶</button>
 </div>
-
-<div id="main">
-  <img id="slide" src="https://picsum.photos/300/300?1">
-  <div id="msg"></div>
-</div>
-
-<!-- Music -->
-<audio id="music" loop>
-  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7f6d1d5f5b.mp3">
-</audio>
 
 <script>
-function start(){
-  document.getElementById("intro").style.display="none";
-  document.getElementById("main").style.display="flex";
-
-  document.getElementById("music").play();
-
-  startEffects();
-  typeMessage();
-  startSlideshow();
-  fireworksLoop();
+function nextPage(){
+  document.body.innerHTML = `
+    <div class="card">
+      <h1>🎂 Surprise Unlocked 🎂</h1>
+      <p>You are the reason for this smile 💖</p>
+      <button onclick="location.reload()">Replay</button>
+    </div>
+  `;
 }
 
-/* Typing Effect */
-let text="Wishing you a magical birthday full of happiness, love and success 💖";
-let i=0;
-
-function typeMessage(){
-  if(i<text.length){
-    document.getElementById("msg").innerHTML+=text.charAt(i);
-    i++;
-    setTimeout(typeMessage,60);
-  }
-}
-
-/* Balloons + Hearts */
-function startEffects(){
-  setInterval(()=>createBalloon(),300);
-  setInterval(()=>createHeart(),400);
-}
-
-function createBalloon(){
-  let b=document.createElement("div");
-  b.className="balloon";
-  b.style.left=Math.random()*100+"vw";
-  b.style.background=randomColor();
-  document.body.appendChild(b);
-  setTimeout(()=>b.remove(),6000);
-}
-
-function createHeart(){
-  let h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="💖";
-  h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=(10+Math.random()*25)+"px";
+/* Floating hearts generator */
+setInterval(()=>{
+  let h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "❤️";
+  h.style.left = Math.random()*100 + "vw";
+  h.style.fontSize = (15 + Math.random()*20) + "px";
+  h.style.animationDuration = (4 + Math.random()*3) + "s";
   document.body.appendChild(h);
-  setTimeout(()=>h.remove(),6000);
-}
 
-/* Fireworks */
-function fireworks(){
-  for(let i=0;i<20;i++){
-    let s=document.createElement("div");
-    s.className="spark";
-    s.style.left=Math.random()*100+"vw";
-    s.style.top=Math.random()*100+"vh";
-    s.style.background=randomColor();
-    document.body.appendChild(s);
-    setTimeout(()=>s.remove(),1000);
-  }
-}
-
-function fireworksLoop(){
-  setInterval(fireworks,1200);
-}
-
-/* Slideshow */
-let img=1;
-function startSlideshow(){
-  setInterval(()=>{
-    img++;
-    if(img>5) img=1;
-    document.getElementById("slide").src=`https://picsum.photos/300/300?${img}`;
-  },2000);
-}
-
-function randomColor(){
-  let colors=["#ff4d6d","#ffb703","#8ecae6","#80ed99","#c77dff","#ff5ca8"];
-  return colors[Math.floor(Math.random()*colors.length)];
-}
+  setTimeout(()=>h.remove(),7000);
+},300);
 </script>
 
 </body>
