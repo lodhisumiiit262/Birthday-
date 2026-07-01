@@ -1,43 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Birthday Surprise</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Birthday Surprise</title>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  background: linear-gradient(to top, #1a1a40, #3b1d5a);
+  font-family: Arial, sans-serif;
+}
+
+/* Floating balloons */
+.balloon {
+  position: absolute;
+  bottom: -100px;
+  width: 40px;
+  height: 50px;
+  border-radius: 50%;
+  animation: floatUp 8s infinite;
+}
+
+.balloon:nth-child(1){left:10%;background:red;animation-delay:0s;}
+.balloon:nth-child(2){left:30%;background:yellow;animation-delay:2s;}
+.balloon:nth-child(3){left:50%;background:skyblue;animation-delay:4s;}
+.balloon:nth-child(4){left:70%;background:pink;animation-delay:1s;}
+.balloon:nth-child(5){left:90%;background:orange;animation-delay:3s;}
+
+@keyframes floatUp {
+  0% {transform: translateY(0);}
+  100% {transform: translateY(-120vh);}
+}
+
+/* Main text */
+h1 {
+  text-align: center;
+  margin-top: 80px;
+  font-size: 50px;
+  color: #fff;
+  text-shadow: 0 0 10px #ff0, 0 0 20px #f0f;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from {text-shadow: 0 0 10px #ff0;}
+  to {text-shadow: 0 0 25px #ff00ff;}
+}
+
+p {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+}
+
+/* Cute cat */
+.cat {
+  position: absolute;
+  bottom: 20px;
+  left: -200px;
+  font-size: 60px;
+  animation: runCat 10s linear infinite;
+}
+
+@keyframes runCat {
+  0% {left: -200px;}
+  100% {left: 110%;}
+}
+
+/* heart rain */
+.heart {
+  position: absolute;
+  top: -10px;
+  color: pink;
+  font-size: 20px;
+  animation: fall 6s linear infinite;
+}
+
+@keyframes fall {
+  to {transform: translateY(110vh);}
+}
+</style>
 </head>
+
 <body>
 
-<audio id="music" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
+<h1>🎉 Happy Birthday Gungun 🎉</h1>
+<p>May your life be full of happiness, love & surprises 💖</p>
 
-<!-- SLIDES -->
-<div id="slide1" class="slide active">
-  <h1>🎬 Ready for Surprise...</h1>
-  <button onclick="nextSlide()">Start</button>
-</div>
+<!-- balloons -->
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
 
-<div id="slide2" class="slide">
-  <h1>🎂 Enter Password</h1>
-  <input type="password" id="pass" placeholder="Enter password">
-  <button onclick="checkPass()">Open</button>
-</div>
+<!-- cat -->
+<div class="cat">🐱💨</div>
 
-<!-- SURPRISE SCREEN -->
-<div id="main" class="hidden">
+<script>
+// heart rain generator
+for(let i=0;i<30;i++){
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.animationDuration = (3 + Math.random()*5) + "s";
+  document.body.appendChild(heart);
+}
+</script>
 
-  <h1 class="title">🎉 Happy Birthday Gungun 🎉</h1>
-
-  <p id="typing"></p>
-
-  <div id="balloons"></div>
-  <div id="hearts"></div>
-
-  <canvas id="fireworks"></canvas>
-
-</div>
-
-<script src="script.js"></script>
 </body>
-</html>
+</html>p
