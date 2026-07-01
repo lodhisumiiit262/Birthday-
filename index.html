@@ -1,14 +1,27 @@
-<!-- index.html me is button ko jahan chahein wahan lagayein -->
-<a href="surprise.html" style="
-    display: inline-block;
-    background: linear-gradient(45deg, #ff65a3, #a154f2);
-    color: white;
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 50px;
-    box-shadow: 0 5px 15px rgba(161, 84, 242, 0.4);
-    text-align: center;">
-    Gungun, Click Here for a Surprise! 🎁
-</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Birthday Surprise</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>🎉 Ready for Surprise 🎉</h1>
+
+    <input type="password" id="pass" placeholder="Enter Password">
+
+    <button onclick="checkPassword()">Open Surprise</button>
+
+    <button class="skip" onclick="skip()">Skip</button>
+  </div>
+
+  <div id="surprise" class="hidden">
+    <h1 class="big-text">🎂 Happy Birthday Gungun 🎂</h1>
+    <p class="msg">Cheeku ❤️ You are my life... I love you 💖</p>
+  </div>
+
+  <script src="script.js"></script>
+</body
