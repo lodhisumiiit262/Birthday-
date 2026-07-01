@@ -1,81 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎉 Happy Birthday Surprise 🎂</title>
-
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Surprise</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <!-- Loading Screen -->
-    <div id="loader">
-        <h1>✨ Preparing Your Surprise... ✨</h1>
+  <audio id="music" loop>
+    <source src="music.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="container">
+
+    <h1>🎉 Birthday Surprise 🎉</h1>
+
+    <input id="nameInput" type="text" placeholder="Enter Name 💖">
+
+    <button onclick="start()">Start Surprise 🎁</button>
+
+    <div id="card" class="hidden">
+      <h2 id="finalName"></h2>
+      <p>🎂 Wishing you a life full of happiness, success & love ✨</p>
     </div>
 
-    <!-- Floating Hearts -->
-    <div class="hearts"></div>
+  </div>
 
-    <!-- Floating Balloons -->
-    <div class="balloons"></div>
+  <div class="balloons"></div>
+  <canvas id="confetti"></canvas>
 
-    <!-- Fireworks -->
-    <canvas id="fireworks"></canvas>
-
-    <!-- Main Container -->
-    <div class="container">
-
-        <h1 class="title">
-            🎂 Happy Birthday 🎂
-        </h1>
-
-        <h2 class="name">
-            Dear <span id="birthdayName">My Special Person</span> ❤️            <h1 class="surprise-title">
-                🎉 Surprise! 🎉
-            </h1>
-
-            <img
-                src="birthday.jpg"
-                alt="Birthday Photo"
-                class="birthday-photo"
-            >
-
-            <h2 class="wish">
-                Happy Birthday ❤️
-            </h2>
-
-            <p class="message">
-                Today is your special day. 🌸<br><br>
-
-                May your life always be filled with happiness,
-                smiles, success, love and endless blessings. ✨<br><br>
-
-                You deserve every beautiful moment in this world. 💖<br><br>
-
-                Stay happy, stay blessed and always keep smiling. 😊❤️
-            </p>
-
-            <button id="showGallery">
-                📸    </div>
-
-    <!-- Falling Rose Petals -->
-    <div class="petals"></div>
-
-    <!-- Background Stars -->
-    <div class="stars"></div>
-
-    <!-- Footer -->
-    <footer>
-        <p>❤️ Made with Love ❤️</p>
-    </footer>
-
-    <!-- JavaScript -->
-    <script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
-            </html>
+</html>
