@@ -2,164 +2,192 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Surprise</title>
-
+<title>Birthday Surprise</title>
 <style>
-*{
+body{
   margin:0;
-  padding:0;
-  font-family:Arial;
-  box-sizing:border-box;
+  font-family: Arial, sans-serif;
+  background:black;
+  color:white;
+  overflow:hidden;
+  text-align:center;
 }
 
-body{
+/* screens */
+.screen{
+  display:none;
   height:100vh;
-  overflow:hidden;
-  background:#0b0f2a;
-  color:white;
-  display:flex;
   justify-content:center;
   align-items:center;
+  flex-direction:column;
 }
+.active{display:flex;}
 
-/* center box */
-.box{
-  text-align:center;
-  padding:30px;
+/* big title */
+h1{
+  font-size:45px;
+  color:pink;
+  text-shadow:0 0 10px red;
 }
 
 /* input */
 input{
-  padding:10px;
+  padding:12px;
   font-size:18px;
   border-radius:10px;
   border:none;
   outline:none;
-  margin-top:15px;
 }
 
-/* button */
+/* buttons */
 button{
-  padding:10px 20px;
   margin-top:15px;
+  padding:12px 25px;
+  font-size:20px;
   border:none;
-  border-radius:20px;
-  background:#ff4da6;
-  color:white;
+  border-radius:12px;
   cursor:pointer;
-  font-size:16px;
+  background:hotpink;
+  color:white;
+  font-weight:bold;
 }
 
-button:hover{
-  transform:scale(1.05);
-}
+button:hover{transform:scale(1.1);}
 
-/* skip button */
+/* skip button big */
 #skip{
   position:absolute;
   right:20px;
   bottom:20px;
-  background:#ffd93d;
-  color:black;
+  background:red;
+  font-size:22px;
 }
 
-/* big text */
-.big{
-  font-size:40px;
-  font-weight:bold;
-  text-align:center;
-}
-
-/* balloon */
+/* balloons */
 .balloon{
   position:absolute;
   bottom:-100px;
   width:30px;
   height:40px;
   border-radius:50%;
-  animation:up 5s linear forwards;
+  animation:fly 5s linear infinite;
 }
 
-@keyframes up{
-  from{transform:translateY(0);}
-  to{transform:translateY(-120vh);}
+@keyframes fly{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-120vh);}
 }
 
-/* romantic page */
-.romantic{
-  text-align:center;
-  padding:30px;
-  max-width:600px;
+/* hearts */
+.heart{
+  position:absolute;
+  color:red;
+  font-size:30px;
+  animation:float 4s linear infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(0) scale(1);}
+  100%{transform:translateY(-100vh) scale(1.5); opacity:0;}
+}
+
+.message{
+  font-size:28px;
+  padding:20px;
+  line-height:1.6;
 }
 
 </style>
 </head>
-
 <body>
 
-<div class="box" id="screen">
-  <h1>✨ Ready for Surprise ✨</h1>
-  <input type="password" id="pass" placeholder="Enter password">
-  <br>
+<!-- SCREEN 1 -->
+<div class="screen active" id="s1">
+  <h1>READY FOR SURPRISE 🎁</h1>
+  <input type="password" id="pass" placeholder="Enter Password">
   <button onclick="check()">Enter</button>
+  <p id="err"></p>
 </div>
 
-<button id="skip" onclick="skip()">Skip ▶</button>
+<!-- SCREEN 2 -->
+<div class="screen" id="s2">
+  <h1>HAPPY BIRTHDAY GUNGUN 🎉</h1>
+  <button id="skip" onclick="startSurprise()">SKIP</button>
+</div>
+
+<!-- SCREEN 3 -->
+<div class="screen" id="s3">
+  <div class="message">
+    💖 Happy Birthday Gungun (Cheeku) 💖<br><br>
+    You are my special one...<br>
+    I love you more than words can say ❤️
+  </div>
+  <button onclick="next()">NEXT</button>
+</div>
+
+<!-- SCREEN 4 -->
+<div class="screen" id="s4">
+  <div class="message">
+    Tum meri life ki sabse beautiful feeling ho 💕<br>
+    Har din tumhari smile meri duniya bana deti hai 😊<br><br>
+    I LOVE YOU SO MUCH ❤️🔥
+  </div>
+</div>
 
 <script>
 
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
 function check(){
   let p = document.getElementById("pass").value;
-  if(p === "gungun"){
-    showBirthday();
-  }else{
-    alert("Wrong password!");
+  if(p==="gungun"){
+    show("s2");
+  } else {
+    document.getElementById("err").innerText="Wrong Password ❌";
   }
 }
 
-function skip(){
-  showBirthday();
+function startSurprise(){
+  show("s3");
+  balloons();
+  hearts();
 }
 
-function showBirthday(){
-  document.body.innerHTML = `
-    <div class="box">
-      <div class="big">
-        🎉 HAPPY BIRTHDAY GUNGUN 🎉<br><br>
-        मेरा बच्चा चीखू ❤️<br>
-        I LOVE YOU 💖
-      </div>
-      <button onclick="romanticPage()">Next ▶</button>
-    </div>
-  `;
+function next(){
+  show("s4");
+  hearts();
+}
 
-  // balloons
-  for(let i=0;i<25;i++){
-    let b = document.createElement("div");
-    b.className = "balloon";
-    b.style.left = Math.random()*100 + "vw";
-    b.style.background = ["red","yellow","blue","pink","orange"][i%5];
-    b.style.animationDuration = (3+Math.random()*3)+"s";
+/* balloons */
+function balloons(){
+  for(let i=0;i<20;i++){
+    let b=document.createElement("div");
+    b.className="balloon";
+    b.style.left=Math.random()*100+"vw";
+    b.style.background=randomColor();
     document.body.appendChild(b);
-
-    setTimeout(()=>b.remove(),6000);
   }
 }
 
-function romanticPage(){
-  document.body.innerHTML = `
-    <div class="romantic">
-      <h1>💌 Special Message 💌</h1>
-      <p style="font-size:18px; margin-top:20px; line-height:1.6;">
-        Tum meri life ka sabse beautiful part ho ❤️<br><br>
-        Har din tumhari smile dekhna hi mera favorite moment hai 😊<br><br>
-        Main hamesha tumhare saath rahunga, chahe kuch bhi ho 💕<br><br>
-        You are my happiness, my peace, my everything 💖
-      </p>
-      <button onclick="location.reload()">Replay 🔁</button>
-    </div>
-  `;
+/* hearts */
+function hearts(){
+  setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.top="100vh";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),4000);
+  },300);
+}
+
+function randomColor(){
+  let c=["red","pink","blue","yellow","purple","orange"];
+  return c[Math.floor(Math.random()*c.length)];
 }
 
 </script>
