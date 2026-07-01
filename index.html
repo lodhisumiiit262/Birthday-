@@ -2,204 +2,150 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Surprise ❤️</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>Birthday Surprise</title>
 <style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, sans-serif;
+}
+
 body{
-margin:0;
-overflow:hidden;
-background:black;
-font-family:Arial;
-color:white;
-text-align:center;
+  height:100vh;
+  background: linear-gradient(to top, #ffdde1, #ee9ca7);
+  overflow:hidden;
 }
 
-/* screens */
-.screen{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-position:absolute;
-width:100%;
+/* Center box */
+.container{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
 }
 
-.hidden{display:none;}
-
-h1{
-font-size:42px;
-text-shadow:0 0 20px pink;
-animation: glow 1s infinite alternate;
-}
-
-@keyframes glow{
-from{transform:scale(1); text-shadow:0 0 10px pink;}
-to{transform:scale(1.05); text-shadow:0 0 25px red;}
-}
-
+/* Button */
 button{
-padding:14px 28px;
-font-size:18px;
-border:none;
-border-radius:12px;
-background:#ff4d6d;
-color:white;
-margin-top:20px;
-cursor:pointer;
+  padding:15px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  background:#ff4081;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+button:hover{
+  transform:scale(1.1);
 }
 
-/* balloons */
+/* Hidden screen */
+.screen{
+  display:none;
+}
+
+/* Balloons */
 .balloon{
-position:absolute;
-bottom:-120px;
-width:35px;
-height:45px;
-border-radius:50%;
-animation:float 7s linear infinite;
-opacity:0.8;
+  position:absolute;
+  bottom:-150px;
+  width:40px;
+  height:50px;
+  background:red;
+  border-radius:50%;
+  animation: floatUp 6s infinite;
 }
 
-@keyframes float{
-0%{transform:translateY(0);}
-100%{transform:translateY(-120vh);}
+@keyframes floatUp{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-120vh);}
 }
 
-/* hearts */
+/* Hearts */
 .heart{
-position:absolute;
-color:pink;
-font-size:20px;
-animation:fall linear forwards;
+  position:absolute;
+  color:red;
+  font-size:24px;
+  animation: floatUp 5s infinite;
 }
 
-@keyframes fall{
-0%{transform:translateY(-10vh) scale(1);}
-100%{transform:translateY(110vh) scale(1.5);}
+/* Final text */
+.final-message{
+  font-size:24px;
+  color:#fff;
+  padding:20px;
+  line-height:1.6;
+  font-weight:bold;
+  animation: fadeIn 2s ease-in-out;
 }
 
-/* fireworks canvas */
-canvas{
-position:fixed;
-top:0;
-left:0;
-pointer-events:none;
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
 }
+
 </style>
 </head>
-
 <body>
 
-<canvas id="fireworks"></canvas>
-
-<!-- PAGE 1 -->
-<div class="screen" id="p1">
-<h1>READY FOR SURPRISE 🎁</h1>
-<button onclick="start()">OK</button>
+<div class="container" id="start">
+  <h1>🎁 Ready for Surprise</h1>
+  <button onclick="showSurprise()">Open</button>
 </div>
 
-<!-- PAGE 2 -->
-<div class="screen hidden" id="p2">
-<h1>🎂 HAPPY BIRTHDAY GUNGUN 🎂</h1>
-<button onclick="showMsg()">NEXT</button>
+<div class="container screen" id="surprise">
+  <h1>🎉 Happy Birthday Gungun 🎉</h1>
+  <button onclick="showEnd()">Next</button>
 </div>
 
-<!-- PAGE 3 -->
-<div class="screen hidden" id="p3">
-<h1>❤️ SPECIAL MESSAGE ❤️</h1>
-<p style="max-width:80%; font-size:18px; line-height:1.6;">
-I love you, Gungun ❤️<br><br>
-Main bahut lucky hoon jo tu meri life mein aayi.<br>
-Hamesha aise hi mere saath rehna.<br><br>
+<div class="container screen" id="end">
 
-3 saal ho gaye humein saath-saath 💖<br>
-Har din aur special lagta hai tere saath.<br><br>
+  <div class="final-message">
+    I love you gungun ❤️<br><br>
+    Happy birthday mere bacche ko 🎂<br>
+    Aise he mere saath rehna hamesha 💞<br>
+    Iss baar ka birthday toh aise he gya 😔<br>
+    Par pakka promise wala saath celebrate karege 💍<br>
+    Promise my dear 😘
+  </div>
 
-Happy Birthday 🎂🎈<br>
-Promise agli baar full dhamaal celebration hoga 🥰
-</p>
 </div>
 
 <script>
 
-/* ---------------- BALLONS ---------------- */
-function balloons(){
-for(let i=0;i<30;i++){
-let b=document.createElement("div");
-b.className="balloon";
-b.style.left=Math.random()*100+"vw";
-b.style.background=["red","pink","yellow","blue","orange"][Math.floor(Math.random()*5)];
-b.style.animationDuration=(4+Math.random()*5)+"s";
-document.body.appendChild(b);
-}
-}
+// balloons + hearts generator
+function createEffects(){
+  setInterval(()=>{
+    let b = document.createElement("div");
+    b.className="balloon";
+    b.style.left = Math.random()*100+"vw";
+    b.style.background = ["#ff4d6d","#ffcc00","#4dd0e1","#7e57c2"][Math.floor(Math.random()*4)];
+    document.body.appendChild(b);
+    setTimeout(()=>b.remove(),6000);
+  },400);
 
-/* ---------------- HEART RAIN ---------------- */
-function hearts(){
-setInterval(()=>{
-let h=document.createElement("div");
-h.className="heart";
-h.innerHTML="💖";
-h.style.left=Math.random()*100+"vw";
-h.style.animationDuration=(3+Math.random()*3)+"s";
-document.body.appendChild(h);
-
-setTimeout(()=>h.remove(),5000);
-},300);
+  setInterval(()=>{
+    let h = document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left = Math.random()*100+"vw";
+    h.style.top = "100vh";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+  },500);
 }
 
-/* ---------------- FIREWORKS ---------------- */
-let c=document.getElementById("fireworks");
-let ctx=c.getContext("2d");
-c.width=window.innerWidth;
-c.height=window.innerHeight;
-
-let particles=[];
-
-function firework(){
-for(let i=0;i<80;i++){
-particles.push({
-x:Math.random()*c.width,
-y:Math.random()*c.height/2,
-vx:(Math.random()-0.5)*5,
-vy:(Math.random()-0.5)*5,
-life:100
-});
-}
+function showSurprise(){
+  document.getElementById("start").style.display="none";
+  document.getElementById("surprise").style.display="flex";
 }
 
-function draw(){
-ctx.clearRect(0,0,c.width,c.height);
-particles.forEach((p,i)=>{
-p.x+=p.vx;
-p.y+=p.vy;
-p.life--;
-
-ctx.fillStyle="rgba(255,200,0,1)";
-ctx.fillRect(p.x,p.y,2,2);
-
-if(p.life<=0) particles.splice(i,1);
-});
-requestAnimationFrame(draw);
-}
-draw();
-
-/* ---------------- FLOW ---------------- */
-function start(){
-document.getElementById("p1").classList.add("hidden");
-document.getElementById("p2").classList.remove("hidden");
-balloons();
-firework();
-}
-
-function showMsg(){
-document.getElementById("p2").classList.add("hidden");
-document.getElementById("p3").classList.remove("hidden");
-balloons();
-hearts();
-firework();
-setInterval(firework,2000);
+function showEnd(){
+  document.getElementById("surprise").style.display="none";
+  document.getElementById("end").style.display="flex";
+  createEffects();
 }
 
 </script>
