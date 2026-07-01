@@ -1,98 +1,106 @@
-body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: radial-gradient(circle at top, #1a1a2e, #0f0c29);
-  color: white;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+<style>
+body{
+  margin:0;
+  overflow:hidden;
+  background:black;
+  font-family:Arial;
+  color:white;
 }
 
-/* glowing card */
-.container {
-  z-index: 2;
-  padding: 30px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 25px rgba(255, 77, 166, 0.4);
+/* Intro */
+#intro{
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 }
 
-/* title glow */
-h1 {
-  font-size: 40px;
-  color: #ff4da6;
-  text-shadow: 0 0 15px #ff4da6;
+h1{
+  font-size:60px;   /* 👈 BIG TEXT FIX */
   animation: glow 2s infinite alternate;
 }
 
-@keyframes glow {
-  from { text-shadow: 0 0 10px #ff4da6; }
-  to { text-shadow: 0 0 30px #ff4da6; }
+@keyframes glow{
+  from{ text-shadow:0 0 10px white; }
+  to{ text-shadow:0 0 40px #ff4fd8; }
 }
 
-input {
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-  margin-top: 10px;
-  outline: none;
-  text-align: center;
+button{
+  padding:15px 30px;
+  font-size:20px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  margin-top:20px;
 }
 
-button {
-  margin-top: 15px;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 25px;
-  background: linear-gradient(45deg, #ff4da6, #ff1e56);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
+/* Main screen */
+#main{
+  display:none;
+  height:100vh;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
 }
 
-button:hover {
-  transform: scale(1.1);
+/* BIG MESSAGE FIX */
+#msg{
+  font-size:40px;   /* 👈 BIG TEXT FIX */
+  color:#ff4fd8;
+  margin-top:25px;
+  min-height:60px;
+  font-weight:bold;
+  text-shadow:0 0 20px #ff4fd8;
 }
 
-/* card */
-.hidden {
-  display: none;
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 15px;
-  background: rgba(255,255,255,0.1);
-  animation: fadeIn 1.5s ease;
+/* Image bigger */
+#slide{
+  width:320px;
+  height:320px;
+  border-radius:20px;
+  margin-top:20px;
+  object-fit:cover;
+  border:4px solid white;
 }
 
-@keyframes fadeIn {
-  from {opacity: 0; transform: translateY(20px);}
-  to {opacity: 1; transform: translateY(0);}
+/* Balloons */
+.balloon{
+  position:absolute;
+  width:35px;
+  height:45px;
+  border-radius:50%;
+  animation: floatUp 6s linear forwards;
 }
 
-/* balloons */
-.balloon {
-  position: absolute;
-  bottom: -50px;
-  width: 20px;
-  height: 30px;
-  border-radius: 50%;
-  animation: floatUp 6s linear infinite;
+@keyframes floatUp{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-120vh); opacity:0;}
 }
 
-@keyframes floatUp {
-  to {
-    transform: translateY(-120vh);
-  }
+/* Hearts */
+.heart{
+  position:absolute;
+  color:#ff5ca8;
+  animation: floatUp 6s linear forwards;
 }
 
-/* confetti canvas */
-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
+/* Fireworks */
+.spark{
+  position:absolute;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:yellow;
+  animation: explode 1s ease-out forwards;
 }
+
+@keyframes explode{
+  from{transform:scale(1); opacity:1;}
+  to{transform:scale(25); opacity:0;}
+}
+</style>
