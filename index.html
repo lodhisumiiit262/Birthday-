@@ -8,20 +8,36 @@
 </head>
 <body>
 
-  <div class="container">
-    <h1>🎉 Ready for Surprise 🎉</h1>
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-    <input type="password" id="pass" placeholder="Enter Password">
+<!-- SLIDES -->
+<div id="slide1" class="slide active">
+  <h1>🎬 Ready for Surprise...</h1>
+  <button onclick="nextSlide()">Start</button>
+</div>
 
-    <button onclick="checkPassword()">Open Surprise</button>
+<div id="slide2" class="slide">
+  <h1>🎂 Enter Password</h1>
+  <input type="password" id="pass" placeholder="Enter password">
+  <button onclick="checkPass()">Open</button>
+</div>
 
-    <button class="skip" onclick="skip()">Skip</button>
-  </div>
+<!-- SURPRISE SCREEN -->
+<div id="main" class="hidden">
 
-  <div id="surprise" class="hidden">
-    <h1 class="big-text">🎂 Happy Birthday Gungun 🎂</h1>
-    <p class="msg">Cheeku ❤️ You are my life... I love you 💖</p>
-  </div>
+  <h1 class="title">🎉 Happy Birthday Gungun 🎉</h1>
 
-  <script src="script.js"></script>
-</body
+  <p id="typing"></p>
+
+  <div id="balloons"></div>
+  <div id="hearts"></div>
+
+  <canvas id="fireworks"></canvas>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
