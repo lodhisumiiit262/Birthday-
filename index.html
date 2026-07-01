@@ -2,20 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Surprise 💖</title>
+<title>Birthday Surprise</title>
+
 <style>
 body{
 margin:0;
-font-family:Arial;
 background:black;
 color:white;
+font-family:Arial;
 overflow:hidden;
 }
 
-.slide{
+/* COMMON SCREEN */
+.screen{
 display:none;
 height:100vh;
-width:100%;
 justify-content:center;
 align-items:center;
 flex-direction:column;
@@ -25,60 +26,129 @@ padding:20px;
 
 .active{
 display:flex;
-animation:fade 1s ease;
 }
 
-@keyframes fade{
-from{opacity:0; transform:scale(0.9);}
-to{opacity:1; transform:scale(1);}
-}
-
+/* TEXT */
 h1{
 font-size:3em;
-color:pink;
-}
-
-p{
-font-size:1.6em;
-max-width:850px;
-line-height:1.7;
 }
 
 button{
-position:fixed;
-bottom:30px;
-right:30px;
-padding:15px 25px;
+padding:12px 25px;
 font-size:18px;
-background:pink;
 border:none;
 border-radius:10px;
+background:pink;
 cursor:pointer;
+margin-top:20px;
 }
 
-button:hover{
-background:#ff4d6d;
-color:white;
+/* INPUT */
+input{
+padding:10px;
+font-size:18px;
+border-radius:8px;
+border:none;
+text-align:center;
+}
+
+/* ANIMATION TEXT */
+.big-text{
+font-size:4em;
+font-weight:bold;
+color:#ff4d6d;
+animation:pop 1s infinite alternate;
+}
+
+@keyframes pop{
+from{transform:scale(1);}
+to{transform:scale(1.1);}
+}
+
+/* BALLONS + HEARTS */
+.balloon, .heart{
+position:absolute;
+font-size:30px;
+animation:floatUp 5s linear infinite;
+}
+
+@keyframes floatUp{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-10vh);}
 }
 </style>
 </head>
 
 <body>
 
-<!-- SLIDE 1 -->
-<div class="slide active">
-<h1>🎉 Ready for Surprise 🎉</h1>
-<p>Ek special message tumhare liye...</p>
+<!-- SCREEN 1 -->
+<div class="screen active" id="s1">
+<h1>READY FOR SURPRISE 🎁</h1>
+<button onclick="go(2)">OK</button>
 </div>
 
-<!-- SLIDE 2 -->
-<div class="slide">
-<h1>🎂 Happy Birthday 🎂</h1>
-<p>Gungun 💖</p>
+<!-- SCREEN 2 -->
+<div class="screen" id="s2">
+<h1>ENTER PASSWORD</h1>
+<input type="password" id="pass" placeholder="password">
+<button onclick="checkPass()">Submit</button>
 </div>
 
-<!-- SLIDE 3 (YOUR EXACT MESSAGE) -->
-<div class="slide">
-<h1>💖 Special Message 💖</h1>
-<p>
-Happy Birthday gungun mera betaa ❤️
+<!-- SCREEN 3 -->
+<div class="screen" id="s3">
+<h1 class="big-text">HAPPY BIRTHDAY GUNGUN 🎉</h1>
+<button onclick="go(4)">NEXT ➡</button>
+</div>
+
+<!-- SCREEN 4 -->
+<div class="screen" id="s4">
+<h1>🎂 HAPPY BIRTHDAY CHEEKU 🎂</h1>
+<p style="font-size:1.5em">
+i love youu so much 💖<br>
+apn hamesha aise he saath rhee 🫂
+</p>
+</div>
+
+<script>
+function go(n){
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+document.getElementById("s"+n).classList.add("active");
+
+if(n==4){
+startEffects();
+}
+}
+
+function checkPass(){
+let p = document.getElementById("pass").value;
+if(p === "gungun"){
+go(3);
+}else{
+alert("Wrong password ❌");
+}
+}
+
+/* BALLONS + HEARTS */
+function startEffects(){
+setInterval(()=>{
+let b = document.createElement("div");
+b.className="balloon";
+b.innerHTML="🎈";
+b.style.left=Math.random()*100+"vw";
+document.body.appendChild(b);
+setTimeout(()=>b.remove(),5000);
+},300);
+
+setInterval(()=>{
+let h = document.createElement("div");
+h.className="heart";
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+},400);
+}
+</script>
+
+</body>
+</html>
