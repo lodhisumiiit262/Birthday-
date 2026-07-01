@@ -2,113 +2,106 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Surprise</title>
+<title>Surprise Letter</title>
+
 <style>
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial;
-  background: black;
-  color: white;
-  text-align: center;
-  overflow: hidden;
+body{
+margin:0;
+font-family:Arial;
+background:black;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
 }
 
-/* First Screen */
-.screen {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+/* link page */
+#linkPage{
+text-align:center;
 }
 
-h1 {
-  font-size: 40px;
-  color: hotpink;
-  animation: glow 2s infinite;
+a{
+font-size:25px;
+color:pink;
+text-decoration:none;
+border:2px solid white;
+padding:10px 20px;
+border-radius:20px;
 }
 
-@keyframes glow {
-  0% { text-shadow: 0 0 5px red; }
-  50% { text-shadow: 0 0 20px yellow; }
-  100% { text-shadow: 0 0 5px red; }
+/* letter box */
+#letterPage{
+display:none;
+text-align:center;
+padding:20px;
 }
 
-button {
-  padding: 12px 25px;
-  font-size: 18px;
-  margin-top: 20px;
-  border: none;
-  border-radius: 20px;
-  background: white;
-  color: black;
-  cursor: pointer;
+.box{
+background:white;
+color:black;
+padding:25px;
+border-radius:15px;
+max-width:300px;
+box-shadow:0 0 20px pink;
 }
 
-/* Balloons */
-.balloon {
-  position: absolute;
-  bottom: -100px;
-  width: 30px;
-  height: 40px;
-  background: red;
-  border-radius: 50%;
-  animation: float 6s linear infinite;
+/* buttons */
+button{
+padding:10px 20px;
+margin:10px;
+font-size:16px;
+border:none;
+border-radius:20px;
+cursor:pointer;
 }
 
-@keyframes float {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-110vh); }
-}
-
-/* Hidden page */
-#page2 {
-  display: none;
-  padding: 40px;
-}
-
-.big-text {
-  font-size: 30px;
-  color: gold;
-  margin-top: 50px;
-  animation: glow 2s infinite;
-}
+.yes{background:lime;}
+.no{background:red;color:white;}
 </style>
+
 </head>
 
 <body>
 
-<div id="page1" class="screen">
-  <h1>🎁 Ready For Surprise?</h1>
-  <button onclick="start()">OK</button>
+<!-- LINK PAGE -->
+<div id="linkPage">
+<a href="#" onclick="openLetter()">💌 Tap Here</a>
 </div>
 
-<div id="page2" class="screen">
-  <h1>🎉 HAPPY BIRTHDAY GUNGUN 🎉</h1>
-  <div class="big-text">
-    I love you ❤️<br>
-    Main bahut lucky hu jo tu meri life me aayi 💕<br>
-    Hamesha mere saath rehna 😘<br>
-    Happy Birthday meri jaan 🎂
-  </div>
+<!-- LETTER PAGE -->
+<div id="letterPage">
+<h2>✨ OPEN IT ✨</h2>
+
+<div class="box">
+Hey ❤️<br><br>
+I have something special for you 🎁<br>
+Do you want to see it?
+</div>
+
+<br>
+
+<button class="yes" onclick="goNext()">YES</button>
+<button class="no" onclick="stay()">NO</button>
+
 </div>
 
 <script>
-function start() {
-  document.getElementById("page1").style.display = "none";
-  document.getElementById("page2").style.display = "flex";
 
-  // balloons create
-  for (let i = 0; i < 25; i++) {
-    let b = document.createElement("div");
-    b.className = "balloon";
-    b.style.left = Math.random() * window.innerWidth + "px";
-    b.style.background = `hsl(${Math.random()*360},100%,60%)`;
-    b.style.animationDuration = (3 + Math.random() * 5) + "s";
-    document.body.appendChild(b);
-  }
+function openLetter(){
+document.getElementById("linkPage").style.display="none";
+document.getElementById("letterPage").style.display="block";
 }
+
+function goNext(){
+alert("Great ❤️ Next Surprise coming...");
+}
+
+function stay(){
+alert("Please come back 😢");
+}
+
 </script>
 
 </body>
