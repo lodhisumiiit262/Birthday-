@@ -2,113 +2,122 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Surprise</title>
-
+<title>Birthday Surprise 💖</title>
 <style>
-body {
-  margin: 0;
-  overflow: hidden;
-  background: linear-gradient(to top, #1a1a40, #3b1d5a);
-  font-family: Arial, sans-serif;
+body{
+margin:0;
+font-family:Arial;
+background:black;
+color:white;
+overflow:hidden;
 }
 
-/* Floating balloons */
-.balloon {
-  position: absolute;
-  bottom: -100px;
-  width: 40px;
-  height: 50px;
-  border-radius: 50%;
-  animation: floatUp 8s infinite;
+.slide{
+display:none;
+height:100vh;
+width:100%;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
 }
 
-.balloon:nth-child(1){left:10%;background:red;animation-delay:0s;}
-.balloon:nth-child(2){left:30%;background:yellow;animation-delay:2s;}
-.balloon:nth-child(3){left:50%;background:skyblue;animation-delay:4s;}
-.balloon:nth-child(4){left:70%;background:pink;animation-delay:1s;}
-.balloon:nth-child(5){left:90%;background:orange;animation-delay:3s;}
-
-@keyframes floatUp {
-  0% {transform: translateY(0);}
-  100% {transform: translateY(-120vh);}
+.active{
+display:flex;
+animation:fade 1s ease;
 }
 
-/* Main text */
-h1 {
-  text-align: center;
-  margin-top: 80px;
-  font-size: 50px;
-  color: #fff;
-  text-shadow: 0 0 10px #ff0, 0 0 20px #f0f;
-  animation: glow 2s infinite alternate;
+@keyframes fade{
+from{opacity:0; transform:scale(0.9);}
+to{opacity:1; transform:scale(1);}
 }
 
-@keyframes glow {
-  from {text-shadow: 0 0 10px #ff0;}
-  to {text-shadow: 0 0 25px #ff00ff;}
+h1{
+font-size:3em;
+color:pink;
 }
 
-p {
-  text-align: center;
-  color: white;
-  font-size: 20px;
+p{
+font-size:1.5em;
+max-width:800px;
+line-height:1.6;
 }
 
-/* Cute cat */
-.cat {
-  position: absolute;
-  bottom: 20px;
-  left: -200px;
-  font-size: 60px;
-  animation: runCat 10s linear infinite;
+button{
+position:fixed;
+bottom:30px;
+right:30px;
+padding:15px 25px;
+font-size:18px;
+background:pink;
+border:none;
+border-radius:10px;
+cursor:pointer;
 }
 
-@keyframes runCat {
-  0% {left: -200px;}
-  100% {left: 110%;}
-}
-
-/* heart rain */
-.heart {
-  position: absolute;
-  top: -10px;
-  color: pink;
-  font-size: 20px;
-  animation: fall 6s linear infinite;
-}
-
-@keyframes fall {
-  to {transform: translateY(110vh);}
+button:hover{
+background:#ff4d6d;
+color:white;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🎉 Happy Birthday Gungun 🎉</h1>
-<p>May your life be full of happiness, love & surprises 💖</p>
+<!-- SLIDE 1 -->
+<div class="slide active">
+<h1>🎉 Ready for Surprise 🎉</h1>
+<p>Ek special message tumhare liye...</p>
+</div>
 
-<!-- balloons -->
-<div class="balloon"></div>
-<div class="balloon"></div>
-<div class="balloon"></div>
-<div class="balloon"></div>
-<div class="balloon"></div>
+<!-- SLIDE 2 -->
+<div class="slide">
+<h1>🎂 Happy Birthday Gungun 🎂</h1>
+<p>Mera baccha, aaj ka din sirf tumhara hai ❤️</p>
+</div>
 
-<!-- cat -->
-<div class="cat">🐱💨</div>
+<!-- SLIDE 3 (YOUR SPECIAL ONE) -->
+<div class="slide">
+<h1>💖 Special Message 💖</h1>
+<p>
+Happy Birthday Gungun mera betaa ❤️‍🩹<br><br>
+I love you soo muchh...<br>
+Aise he saath rehna meree hamesha 🫂💞
+</p>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide">
+<h1>🌹 You Are Special 🌹</h1>
+<p>Tum meri life ki sabse beautiful feeling ho ✨</p>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide">
+<h1>💫 Always Together 💫</h1>
+<p>Kabhi door mat hona... bas saath rehna ❤️</p>
+</div>
+
+<button onclick="nextSlide()">Next ➡</button>
 
 <script>
-// heart rain generator
-for(let i=0;i<30;i++){
-  let heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "💖";
-  heart.style.left = Math.random()*100 + "vw";
-  heart.style.animationDuration = (3 + Math.random()*5) + "s";
-  document.body.appendChild(heart);
+let index = 0;
+let slides = document.querySelectorAll(".slide");
+
+function showSlide(i){
+slides.forEach(s => s.classList.remove("active"));
+slides[i].classList.add("active");
+}
+
+function nextSlide(){
+index++;
+if(index >= slides.length){
+index = 0;
+}
+showSlide(index);
 }
 </script>
 
 </body>
-</html>p
+</html>
