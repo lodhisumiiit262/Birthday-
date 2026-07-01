@@ -4,150 +4,111 @@
 <meta charset="UTF-8">
 <title>Birthday Surprise</title>
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: Arial, sans-serif;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial;
+  background: black;
+  color: white;
+  text-align: center;
+  overflow: hidden;
 }
 
-body{
-  height:100vh;
-  background: linear-gradient(to top, #ffdde1, #ee9ca7);
-  overflow:hidden;
+/* First Screen */
+.screen {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Center box */
-.container{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  text-align:center;
+h1 {
+  font-size: 40px;
+  color: hotpink;
+  animation: glow 2s infinite;
 }
 
-/* Button */
-button{
-  padding:15px 30px;
-  font-size:18px;
-  border:none;
-  border-radius:30px;
-  background:#ff4081;
-  color:white;
-  cursor:pointer;
-  transition:0.3s;
-}
-button:hover{
-  transform:scale(1.1);
+@keyframes glow {
+  0% { text-shadow: 0 0 5px red; }
+  50% { text-shadow: 0 0 20px yellow; }
+  100% { text-shadow: 0 0 5px red; }
 }
 
-/* Hidden screen */
-.screen{
-  display:none;
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 20px;
+  background: white;
+  color: black;
+  cursor: pointer;
 }
 
 /* Balloons */
-.balloon{
-  position:absolute;
-  bottom:-150px;
-  width:40px;
-  height:50px;
-  background:red;
-  border-radius:50%;
-  animation: floatUp 6s infinite;
+.balloon {
+  position: absolute;
+  bottom: -100px;
+  width: 30px;
+  height: 40px;
+  background: red;
+  border-radius: 50%;
+  animation: float 6s linear infinite;
 }
 
-@keyframes floatUp{
-  0%{transform:translateY(0);}
-  100%{transform:translateY(-120vh);}
+@keyframes float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-110vh); }
 }
 
-/* Hearts */
-.heart{
-  position:absolute;
-  color:red;
-  font-size:24px;
-  animation: floatUp 5s infinite;
+/* Hidden page */
+#page2 {
+  display: none;
+  padding: 40px;
 }
 
-/* Final text */
-.final-message{
-  font-size:24px;
-  color:#fff;
-  padding:20px;
-  line-height:1.6;
-  font-weight:bold;
-  animation: fadeIn 2s ease-in-out;
+.big-text {
+  font-size: 30px;
+  color: gold;
+  margin-top: 50px;
+  animation: glow 2s infinite;
 }
-
-@keyframes fadeIn{
-  from{opacity:0;}
-  to{opacity:1;}
-}
-
 </style>
 </head>
+
 <body>
 
-<div class="container" id="start">
-  <h1>🎁 Ready for Surprise</h1>
-  <button onclick="showSurprise()">Open</button>
+<div id="page1" class="screen">
+  <h1>🎁 Ready For Surprise?</h1>
+  <button onclick="start()">OK</button>
 </div>
 
-<div class="container screen" id="surprise">
-  <h1>🎉 Happy Birthday Gungun 🎉</h1>
-  <button onclick="showEnd()">Next</button>
-</div>
-
-<div class="container screen" id="end">
-
-  <div class="final-message">
-    I love you gungun ❤️<br><br>
-    Happy birthday mere bacche ko 🎂<br>
-    Aise he mere saath rehna hamesha 💞<br>
-    Iss baar ka birthday toh aise he gya 😔<br>
-    Par pakka promise wala saath celebrate karege 💍<br>
-    Promise my dear 😘
+<div id="page2" class="screen">
+  <h1>🎉 HAPPY BIRTHDAY GUNGUN 🎉</h1>
+  <div class="big-text">
+    I love you ❤️<br>
+    Main bahut lucky hu jo tu meri life me aayi 💕<br>
+    Hamesha mere saath rehna 😘<br>
+    Happy Birthday meri jaan 🎂
   </div>
-
 </div>
 
 <script>
+function start() {
+  document.getElementById("page1").style.display = "none";
+  document.getElementById("page2").style.display = "flex";
 
-// balloons + hearts generator
-function createEffects(){
-  setInterval(()=>{
+  // balloons create
+  for (let i = 0; i < 25; i++) {
     let b = document.createElement("div");
-    b.className="balloon";
-    b.style.left = Math.random()*100+"vw";
-    b.style.background = ["#ff4d6d","#ffcc00","#4dd0e1","#7e57c2"][Math.floor(Math.random()*4)];
+    b.className = "balloon";
+    b.style.left = Math.random() * window.innerWidth + "px";
+    b.style.background = `hsl(${Math.random()*360},100%,60%)`;
+    b.style.animationDuration = (3 + Math.random() * 5) + "s";
     document.body.appendChild(b);
-    setTimeout(()=>b.remove(),6000);
-  },400);
-
-  setInterval(()=>{
-    let h = document.createElement("div");
-    h.className="heart";
-    h.innerHTML="❤️";
-    h.style.left = Math.random()*100+"vw";
-    h.style.top = "100vh";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),5000);
-  },500);
+  }
 }
-
-function showSurprise(){
-  document.getElementById("start").style.display="none";
-  document.getElementById("surprise").style.display="flex";
-}
-
-function showEnd(){
-  document.getElementById("surprise").style.display="none";
-  document.getElementById("end").style.display="flex";
-  createEffects();
-}
-
 </script>
 
 </body>
