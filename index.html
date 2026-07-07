@@ -1,146 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Birthday Surprise</title>
-
-<style>
-*{
-  margin:0;
-  padding:0;
-  font-family:Arial, sans-serif;
-}
-
-body{
-  background:#000;
-  height:100vh;
-  overflow:hidden;
-  color:white;
-}
-
-/* slides */
-.slide{
-  display:none;
-  height:100vh;
-  width:100%;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  text-align:center;
-}
-
-.active{
-  display:flex;
-  animation:fade 1s ease;
-}
-
-@keyframes fade{
-  from{opacity:0; transform:scale(0.9);}
-  to{opacity:1; transform:scale(1);}
-}
-
-/* heading */
-h1{
-  color:#ff4b5c;
-  text-shadow:0 0 20px #ff4b5c;
-}
-
-/* button */
-button{
-  margin-top:20px;
-  padding:12px 25px;
-  border:none;
-  border-radius:25px;
-  background:#ff4b5c;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-button:hover{
-  transform:scale(1.1);
-}
-
-/* cake */
-#cake{
-  font-size:160px;
-  cursor:pointer;
-}
-</style>
-</head>
-
-<body>
-
-<!-- SLIDE 1 -->
-<div class="slide active" id="s1">
-  <h1>HAPPY BIRTHDAY GUNGUN</h1>
-  <button onclick="next(1)">Start Surprise</button>
-</div>
-
-<!-- SLIDE 2 -->
-<div class="slide" id="s2">
-  <h1>💖 HAPPY BIRTHDAY DEAR 💖</h1>
-
-  <p style="font-size:18px; color:#ddd; max-width:650px; line-height:1.8;">
-    ❤️ mera chheku,<br><br>
-
-    tum hamesha mere saath aise hi rehna ✨<br>
-    yeh birthday hum saath celebrate nahi kar paaye 😔<br><br>
-
-    next birthday promise hai 🎉<br>
-    saath me celebrate karege 💕
-  </p>
-
-  <button onclick="next(2)">Next</button>
-</div>
-
-<!-- SLIDE 3 -->
-<div class="slide" id="s3">
-  <h1>🎂 Cake Cutting 🎂</h1>
-
-  <div id="cake" onclick="cutCake()">🎂</div>
-
-  <p id="msg"></p>
-
-  <button onclick="next(3)">Next</button>
-</div>
-
-<!-- SLIDE 4 -->
-<div class="slide" id="s4">
-  <h1>💖 HAPPY COUPLE 💖</h1>
-
-  <p style="font-size:20px; color:#ddd; line-height:1.8; margin-top:10px;">
-    🐱 I LOVE YOU MERA CUTIE 🐱<br><br>
-    ❤️ Forever Together ❤️
-  </p>
-
-  <h2 style="margin-top:20px; color:#ff4b5c;">
-    💕💖💕💖💕
-  </h2>
-
-  <button onclick="restart()">Finish</button>
-</div>
-
-<script>
-
-function next(n){
-  document.getElementById("s"+n).classList.remove("active");
-  document.getElementById("s"+(n+1)).classList.add("active");
-}
-
-/* cake cut */
-function cutCake(){
-  document.getElementById("cake").innerHTML = "🍰✨";
-  document.getElementById("msg").innerHTML = "🎉 Cake Cut Successfully ❤️ Happy Birthday!";
-}
-
-/* restart */
-function restart(){
-  location.reload();
-}
-
-</script>
-
-</body>
-</html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vicky</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family
